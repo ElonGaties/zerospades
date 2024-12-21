@@ -140,7 +140,9 @@ static asQWORD __attribute__((noinline)) X64_CallFunction(const asQWORD *args, i
 	// Inform the stack unwind logic that the stack pointer has been restored
 	// This should only be done if any optimization is done. If no optimization (-O0) is used,
 	// then the compiler already backups the rsp before entering the inline assembler code
+#ifndef __APPLE__
 		" .cfi_def_cfa_register rsp \n"
+#endif
 #endif
 
 	// Put return value in retQW1 and retQW2, using either RAX:RDX or XMM0:XMM1 depending on type of return value
